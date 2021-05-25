@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useState } from 'react';
 import {
   Box,
   Heading,
@@ -6,7 +8,6 @@ import {
   Skeleton,
   SkeletonText,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 
 interface Card {
   title: string;
