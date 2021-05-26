@@ -25,8 +25,12 @@ interface ImagesData {
 }
 
 export default function Home(): JSX.Element {
-  async function fetchImages({ pageParam = 0 }): Promise<ImagesData> {
-    const { data } = await api.get(`/images?after=${pageParam}`);
+  async function fetchImages({ pageParam = null }): Promise<ImagesData> {
+    const { data } = await api.get('/images', {
+      params: {
+        after: pageParam,
+      },
+    });
 
     return data;
   }
@@ -39,7 +43,7 @@ export default function Home(): JSX.Element {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery('images', fetchImages, {
-    getNextPageParam: after => after || null,
+    getNextPageParam: ({ after }) => after || null,
   });
 
   const formattedData = useMemo(() => {
@@ -60,7 +64,8 @@ export default function Home(): JSX.Element {
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
-        {!hasNextPage && (
+
+        {hasNextPage && (
           <Button onClick={() => fetchNextPage()}>
             {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
           </Button>

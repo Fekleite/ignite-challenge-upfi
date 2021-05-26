@@ -23,8 +23,8 @@ export function ModalViewImage({
     <Modal motionPreset="slideInBottom" onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent maxW="900px" w="100%">
-        <ModalBody padding={0}>
-          <Image maxH="600px" w="100%" objectFit="cover" src={imgUrl} />
+        <ModalBody padding={0} bgColor="pGray.800">
+          <Image maxH="600px" w="100%" objectFit="contain" src={imgUrl} />
         </ModalBody>
         <ModalFooter
           py="8px"
